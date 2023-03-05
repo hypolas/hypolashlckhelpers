@@ -18,7 +18,7 @@ type InitHlckCustom struct {
 }
 
 var (
-	logf = logg.NewLogger("")
+	log = logg.NewLogger("")
 )
 
 // NewResult this variable is used for HYPOLAS HEALTHCHECK

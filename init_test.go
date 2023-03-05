@@ -3,7 +3,6 @@ package hypolashlckhelpers
 import (
 	"bufio"
 	"fmt"
-	logg "github.com/hypolas/hypolaslogger"
 	"os"
 	"testing"
 )
@@ -16,10 +15,6 @@ func TestLogs(t *testing.T) {
 	if err != nil {
 		fmt.Println(err)
 	}
-
-	fmt.Println(fpath)
-
-	log := logg.NewLogger("")
 
 	v := NewEnvVars("HYPOLAS_HEALTHCHECK_HTTP_URL", "")
 	if v != "OK" {
