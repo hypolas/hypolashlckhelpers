@@ -2,24 +2,11 @@ package hypolashlckhelpers
 
 import (
 	"bytes"
-	"fmt"
 	"os"
 	"os/exec"
 	"strings"
 	"unicode"
 )
-
-// InitEnvVars will resolve command output from variable
-//
-// Exemple env var with value: http://#CMDSTART# hostname -i #CMDEND#:8082/ping
-//
-// will be interpreted to : http://XX.XXX.XX.X:8082/ping
-func (init InitHlckCustom) InitEnvVars(environmentVariable, defaultValue string) string {
-	if init.ID != "" {
-		environmentVariable = strings.Replace(environmentVariable, "HYPOLAS_HEALTHCHECK_", fmt.Sprintf("HYPOLAS_HEALTHCHECK_%s", init.ID), -1)
-	}
-	return getEnv(environmentVariable, defaultValue)
-}
 
 func getEnv(enVar string, fallback string) string {
 	if value, ok := os.LookupEnv(enVar); ok {

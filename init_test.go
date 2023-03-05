@@ -20,7 +20,7 @@ func TestLogs(t *testing.T) {
 	log := logg.NewLogger("")
 
 	vars := InitHlckCustom{}
-	v := vars.InitEnvVars("HYPOLAS_HEALTHCHECK_HTTP_URL", "titi")
+	v := vars.NewEnvVars("HYPOLAS_HEALTHCHECK_HTTP_URL", "titi")
 	log.Info.Println(v)
 
 	// Test variable
