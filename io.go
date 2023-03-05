@@ -42,13 +42,17 @@ func NewLogger() logg.HypolasLogger {
 //
 // will be interpreted to : http://XX.XXX.XX.X:8082/ping
 func NewEnvVars(environmentVariable, defaultValue string) string {
+	environmentVariable = GetUpdatedEnvVarName(environmentVariable)
+	log.Info.Println(environmentVariable)
+	return getEnv(environmentVariable, defaultValue)
+}
+
+// GetRUpdatedEnvVarName change the environnment variable if ID used
+func GetUpdatedEnvVarName(environmentVariable string) string {
 	customID := os.Getenv("HYPOLAS_HEALTHCHECK_ID")
 	log.VarDebug(customID, "customID")
 	if customID != "" {
-		newVar := strings.Replace(environmentVariable, "HYPOLAS_HEALTHCHECK_", fmt.Sprintf("HYPOLAS_HEALTHCHECK_%s_", customID), -1)
-		environmentVariable = newVar
-
+		return strings.Replace(environmentVariable, "HYPOLAS_HEALTHCHECK_", fmt.Sprintf("HYPOLAS_HEALTHCHECK_%s_", customID), -1)
 	}
-	log.Info.Println(environmentVariable)
-	return getEnv(environmentVariable, defaultValue)
+	return environmentVariable
 }
