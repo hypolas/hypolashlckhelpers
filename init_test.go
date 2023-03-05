@@ -12,7 +12,12 @@ import (
 func TestLogs(t *testing.T) {
 	fpath := os.Getenv("HYPOLAS_LOGS_FILE")
 	// Remove existing test file
-	os.Remove(fpath)
+	err := os.Remove(fpath)
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	fmt.Println(fpath)
 
 	log := logg.NewLogger("")
 
@@ -22,9 +27,15 @@ func TestLogs(t *testing.T) {
 		log.Err.Fatalln(v)
 	}
 
-	vars.ID = "MYID"
+	vars.ID = "MYID1"
 	v = vars.NewEnvVars("HYPOLAS_HEALTHCHECK_HTTP_URL", "")
 	if v != "OK" {
+		log.Err.Fatalln(v)
+	}
+
+	vars.ID = "MYID2"
+	v = vars.NewEnvVars("HYPOLAS_HEALTHCHECK_HTTP_URL", "")
+	if v != "VAROK" {
 		log.Err.Fatalln(v)
 	}
 

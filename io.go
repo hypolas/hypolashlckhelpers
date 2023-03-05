@@ -20,7 +20,7 @@ import (
 //
 // do other thing with this
 //
-// # Result must be returned at enf of you check
+// # Result must be returned at end of check
 func NewResult() Result {
 	return Result{}
 }
