@@ -10,8 +10,9 @@ on:
     branches: [ "main" ]
 
 env:
-  HYPOLAS_LOGS_FILE: test/logs.log
-  HYPOLAS_HEALTHCHECK_HTTP_URL: "http://#CMDSTART# hostname -i #CMDEND#:8082/ping"
+  HYPOLAS_HEALTHCHECK_HTTP_URL: OK
+  HYPOLAS_HEALTHCHECK_MYID_HTTP_URL: OK
+  HYPOLAS_LOGS_FILE: test/log.log
 
 jobs:
   build:
