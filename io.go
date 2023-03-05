@@ -31,7 +31,7 @@ func NewResult() Result {
 //
 // Please not use other logs system
 func NewLogger() logg.HypolasLogger {
-	return logg.HypolasLogger{}
+	return logg.NewLogger("")
 }
 
 // InitEnvVars will resolve command output from variable
