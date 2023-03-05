@@ -2,5 +2,7 @@ github.com/hypolas/hypolaslogger v0.0.4 h1:vffdaov1HUWPjZZxNRr57nAxMirpnnpKDLN5h
 github.com/hypolas/hypolaslogger v0.0.4/go.mod h1:9o5WwO5O6FCj4nNYpxinDByLAM63jg1xR1IFdnYc7RU=
 github.com/hypolas/hypolaslogger v0.0.8 h1:lWKfJnrAWjgWSkBzt0M+09MCJvo+mKBeSldUr6XVuQw=
 github.com/hypolas/hypolaslogger v0.0.8/go.mod h1:9o5WwO5O6FCj4nNYpxinDByLAM63jg1xR1IFdnYc7RU=
+github.com/hypolas/hypolaslogger v0.0.9 h1:h5lVF5Tuo3bYjWpRW1YOujtCiXc8VbJHRCwpHucbSlg=
+github.com/hypolas/hypolaslogger v0.0.9/go.mod h1:9o5WwO5O6FCj4nNYpxinDByLAM63jg1xR1IFdnYc7RU=
 github.com/joho/godotenv v1.5.1 h1:7eLL/+HRGLY0ldzfGMeQkb7vMd0as4CfYvUVzLqw0N0=
 github.com/joho/godotenv v1.5.1/go.mod h1:f4LDr5Voq0i2e/R5DDNOoa2zzDfwtkZa6DnEwAbqwq4=
