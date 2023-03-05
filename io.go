@@ -6,6 +6,7 @@ import (
 	"strings"
 
 	logg "github.com/hypolas/hypolaslogger"
+
 )
 
 // NewResult this variable is used for HYPOLAS HEALTHCHECK
@@ -43,7 +44,7 @@ func NewLogger() logg.HypolasLogger {
 // will be interpreted to : http://XX.XXX.XX.X:8082/ping
 func NewEnvVars(environmentVariable, defaultValue string) string {
 	environmentVariable = GetUpdatedEnvVarName(environmentVariable)
-	log.Info.Println(environmentVariable)
+	log.Info.Println("environmentVariable", environmentVariable)
 	return getEnv(environmentVariable, defaultValue)
 }
 
