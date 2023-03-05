@@ -14,20 +14,20 @@ import (
 // Exemple env var with value: http://#CMDSTART# hostname -i #CMDEND#:8082/ping
 //
 // will be interpreted to : http://XX.XXX.XX.X:8082/ping
-func (init InitHlckCustom) InitEnvVars(environmentVariable string, defaultValue any) any {
+func (init InitHlckCustom) InitEnvVars(environmentVariable, defaultValue string) string {
 	if init.ID != "" {
 		environmentVariable = strings.Replace(environmentVariable, "HYPOLAS_HEALTHCHECK_", fmt.Sprintf("HYPOLAS_HEALTHCHECK_%s", init.ID), -1)
 	}
 	return getEnv(environmentVariable, defaultValue)
 }
 
-func getEnv(enVar string, fallback any) any {
+func getEnv(enVar string, fallback string) string {
 	if value, ok := os.LookupEnv(enVar); ok {
 		if strings.Contains(value, "#CMDSTART#") {
 			return resolveCMD(os.ExpandEnv(value))
 		}
 	}
-	return os.ExpandEnv(fallback.(string))
+	return os.ExpandEnv(fallback)
 }
 
 /*
