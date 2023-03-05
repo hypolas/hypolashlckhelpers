@@ -9,25 +9,13 @@ import (
 	"unicode"
 )
 
-func (init InitHlckCustom) GenerateVars(environmentVariable string, defaultValue any) any {
+// InitEnvVars transforme variables en resolve command output
+func (init InitHlckCustom) InitEnvVars(environmentVariable string, defaultValue any) any {
 	if init.ID != "" {
 		environmentVariable = strings.Replace(environmentVariable, "HYPOLAS_HEALTHCHECK_", fmt.Sprintf("HYPOLAS_HEALTHCHECK_%s", init.ID), -1)
 	}
 	return getEnv(environmentVariable, defaultValue)
 }
-
-// /*
-// *	Format environnement variables
-//  */
-// func resolveVariable(strVar string) string {
-// 	if strings.Contains(strVar, "#CMDSTART#") {
-// 		strVar = resolveCMD(strVar)
-// 	}
-// 	outStr := os.ExpandEnv(strVar)
-// 	logf.VarDebug(outStr, "outStr")
-
-// 	return outStr
-// }
 
 func getEnv(enVar string, fallback any) any {
 	if value, ok := os.LookupEnv(enVar); ok {
