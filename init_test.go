@@ -21,23 +21,12 @@ func TestLogs(t *testing.T) {
 
 	log := logg.NewLogger("")
 
-	vars := InitHlckCustom{}
-	v := vars.NewEnvVars("HYPOLAS_HEALTHCHECK_HTTP_URL", "")
+	v := NewEnvVars("HYPOLAS_HEALTHCHECK_HTTP_URL", "")
 	if v != "OK" {
 		log.Err.Fatalln(v)
+	} else {
+		log.Info.Println(v)
 	}
-
-	vars.ID = "MYID1"
-	v = vars.NewEnvVars("HYPOLAS_HEALTHCHECK_HTTP_URL", "")
-	if v != "OK" {
-		log.Err.Fatalln(v)
-	}
-
-	// vars.ID = "MYID2"
-	// v = vars.NewEnvVars("HYPOLAS_HEALTHCHECK_HTTP_URL", "")
-	// if v != "VAROK" {
-	// 	log.Err.Fatalln(v)
-	// }
 
 	readFile, err := os.Open(fpath)
 

@@ -2,8 +2,10 @@ package hypolashlckhelpers
 
 import (
 	"fmt"
-	logg "github.com/hypolas/hypolaslogger"
+	"os"
 	"strings"
+
+	logg "github.com/hypolas/hypolaslogger"
 )
 
 // NewResult this variable is used for HYPOLAS HEALTHCHECK
@@ -34,15 +36,15 @@ func NewLogger() logg.HypolasLogger {
 	return logg.NewLogger("")
 }
 
-// InitEnvVars will resolve command output from variable
+// NewEnvVars will resolve command output from variable
 //
 // Exemple env var with value: http://#CMDSTART# hostname -i #CMDEND#:8082/ping
 //
 // will be interpreted to : http://XX.XXX.XX.X:8082/ping
-func (init InitHlckCustom) NewEnvVars(environmentVariable, defaultValue string) string {
-	logf.Info.Println(environmentVariable)
-	if init.ID != "" {
-		newVar := strings.Replace(environmentVariable, "HYPOLAS_HEALTHCHECK_", fmt.Sprintf("HYPOLAS_HEALTHCHECK_%s_", init.ID), -1)
+func NewEnvVars(environmentVariable, defaultValue string) string {
+	customID := os.Getenv("HYPOLAS_HEALTHCHECK_ID")
+	if customID != "" {
+		newVar := strings.Replace(environmentVariable, "HYPOLAS_HEALTHCHECK_", fmt.Sprintf("HYPOLAS_HEALTHCHECK_%s_", customID), -1)
 		environmentVariable = newVar
 
 	}
