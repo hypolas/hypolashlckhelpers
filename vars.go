@@ -6,7 +6,7 @@ import (
 
 // InitVars modules (http, MySQL, PostgreSQL ...)
 type InitHlckCustom struct {
-	ID *string
+	ID string
 }
 
 var (

@@ -9,9 +9,9 @@ import (
 	"unicode"
 )
 
-func (init InitHlckCustom) GenerateVars(environmentVariable string, defaultValue, typeVar any) any {
-	if *init.ID != "" {
-		environmentVariable = strings.Replace(environmentVariable, "HYPOLAS_HEALTHCHECK_", fmt.Sprintf("HYPOLAS_HEALTHCHECK_%s", *init.ID), -1)
+func (init InitHlckCustom) GenerateVars(environmentVariable string, defaultValue any) any {
+	if init.ID != "" {
+		environmentVariable = strings.Replace(environmentVariable, "HYPOLAS_HEALTHCHECK_", fmt.Sprintf("HYPOLAS_HEALTHCHECK_%s", init.ID), -1)
 	}
 	return getEnv(environmentVariable, defaultValue)
 }
@@ -62,7 +62,7 @@ func resolveCMD(cmdString string) string {
 	cmd.Env = os.Environ()
 	err := cmd.Run()
 	if err != nil {
-		logf.Err.Fatalln("%s\n", err)
+		logf.Err.Fatalf("%s\n", err)
 	}
 
 	/*
