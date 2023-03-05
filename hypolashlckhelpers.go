@@ -9,7 +9,11 @@ import (
 	"unicode"
 )
 
-// InitEnvVars transforme variables en resolve command output
+// InitEnvVars will resolve command output from variable
+//
+// Exemple env var with value: http://#CMDSTART# hostname -i #CMDEND#:8082/ping
+//
+// will be interpreted to : http://XX.XXX.XX.X:8082/ping
 func (init InitHlckCustom) InitEnvVars(environmentVariable string, defaultValue any) any {
 	if init.ID != "" {
 		environmentVariable = strings.Replace(environmentVariable, "HYPOLAS_HEALTHCHECK_", fmt.Sprintf("HYPOLAS_HEALTHCHECK_%s", init.ID), -1)
