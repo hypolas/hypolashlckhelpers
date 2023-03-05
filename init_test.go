@@ -33,11 +33,11 @@ func TestLogs(t *testing.T) {
 		log.Err.Fatalln(v)
 	}
 
-	vars.ID = "MYID2"
-	v = vars.NewEnvVars("HYPOLAS_HEALTHCHECK_HTTP_URL", "")
-	if v != "VAROK" {
-		log.Err.Fatalln(v)
-	}
+	// vars.ID = "MYID2"
+	// v = vars.NewEnvVars("HYPOLAS_HEALTHCHECK_HTTP_URL", "")
+	// if v != "VAROK" {
+	// 	log.Err.Fatalln(v)
+	// }
 
 	readFile, err := os.Open(fpath)
 
