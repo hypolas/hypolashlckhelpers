@@ -2,30 +2,18 @@ package hypolashlckhelpers
 
 import (
 	"bytes"
-	"fmt"
 	"os"
 	"os/exec"
 	"strings"
 	"unicode"
 )
 
-// InitEnvVars will resolve command output from variable
-//
-// Exemple env var with value: http://#CMDSTART# hostname -i #CMDEND#:8082/ping
-//
-// will be interpreted to : http://XX.XXX.XX.X:8082/ping
-func (init InitHlckCustom) InitEnvVars(environmentVariable, defaultValue string) string {
-	if init.ID != "" {
-		environmentVariable = strings.Replace(environmentVariable, "HYPOLAS_HEALTHCHECK_", fmt.Sprintf("HYPOLAS_HEALTHCHECK_%s", init.ID), -1)
-	}
-	return getEnv(environmentVariable, defaultValue)
-}
-
 func getEnv(enVar string, fallback string) string {
 	if value, ok := os.LookupEnv(enVar); ok {
 		if strings.Contains(value, "#CMDSTART#") {
 			return resolveCMD(os.ExpandEnv(value))
 		}
+		return os.ExpandEnv(value)
 	}
 	return os.ExpandEnv(fallback)
 }
@@ -37,11 +25,11 @@ func resolveCMD(cmdString string) string {
 	inputString := strings.TrimSpace(cmdString)
 	strCommand := getStringInBetween(inputString, "#CMDSTART#", "#CMDEND#")
 	stringToReplace := "#CMDSTART#" + strCommand + "#CMDEND#"
-	logf.VarDebug(strCommand, "strCommand")
-	logf.VarDebug(stringToReplace, "stringToReplace")
+	log.VarDebug(strCommand, "strCommand")
+	log.VarDebug(stringToReplace, "stringToReplace")
 
 	cmdArgs := strings.Split(strings.TrimSpace(strCommand), " ")
-	logf.VarDebug(cmdArgs, "cmdArgs")
+	log.VarDebug(cmdArgs, "cmdArgs")
 
 	var cmd *exec.Cmd
 	if len(cmdArgs) == 1 {
@@ -54,7 +42,7 @@ func resolveCMD(cmdString string) string {
 	cmd.Env = os.Environ()
 	err := cmd.Run()
 	if err != nil {
-		logf.Err.Fatalf("%s\n", err)
+		log.Err.Fatalf("%s\n", err)
 	}
 
 	/*
@@ -63,10 +51,10 @@ func resolveCMD(cmdString string) string {
 	cmdResult := strings.TrimFunc(stdout.String(), func(r rune) bool {
 		return !unicode.IsGraphic(r)
 	})
-	logf.VarDebug(cmdResult, "cmdResult")
+	log.VarDebug(cmdResult, "cmdResult")
 
 	detectedCMDValue := strings.Replace(inputString, stringToReplace, cmdResult, -1)
-	logf.VarDebug(detectedCMDValue, "detectedCMDValue")
+	log.VarDebug(detectedCMDValue, "detectedCMDValue")
 
 	return detectedCMDValue
 }

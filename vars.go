@@ -5,10 +5,36 @@ import (
 )
 
 // InitHlckCustom modules (http, MySQL, PostgreSQL ...)
+//
+// Exemple:
+//
+// healthcheck --id MYID while transform
+//
+// HYPOLAS_HEALTHCHECK_XXX_XXX to HYPOLAS_HEALTHCHECK_MYID_XXX_XXX
+//
+// so user can chain healthcheck
 type InitHlckCustom struct {
-	ID string
+	ID string // Used for chain healthcheck
 }
 
 var (
-	logf = logg.NewLogger("")
+	log = logg.NewLogger("")
 )
+
+// NewResult this variable is used for HYPOLAS HEALTHCHECK
+//
+// for interpret your returned value
+//
+// # Result.IsUP
+//
+// must ne true if your healthcheck is OK
+//
+// # Result.Output
+//
+// must return value of your healthcheck if user want
+//
+// do other thing with this
+type Result struct {
+	IsUP   bool
+	Output string
+}
