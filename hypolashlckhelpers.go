@@ -26,6 +26,7 @@ func getEnv(enVar string, fallback string) string {
 		if strings.Contains(value, "#CMDSTART#") {
 			return resolveCMD(os.ExpandEnv(value))
 		}
+		return os.ExpandEnv(value)
 	}
 	return os.ExpandEnv(fallback)
 }
